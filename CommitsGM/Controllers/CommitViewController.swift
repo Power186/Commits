@@ -22,15 +22,18 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
         commitTableView.delegate = self
         commitTableView.dataSource = self
         
-        // Fetch data with SwiftyJSON from GitHub API
+        // Fetch data with SwiftyJSON from GitHub API, if error returns nil
         if let data = try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!) {
             let jsonCommits = JSON(parseJSON: data)
             
             // read the commits back out
             let jsonCommitArray = jsonCommits.arrayValue
             
-            // DEBUG: return if data from JSON fetched from GitHub is 0
-            assert((jsonCommitArray.count != 0), "jsonCommits data is empty")
+            // Debug: return if array is less than the request param of 25
+            assert(jsonCommitArray.count >= 25, "array is returning less than 25")
+            
+            // Debug: return if data from JSON fetched from GitHub is 0
+            assert((jsonCommitArray.count != 0), "jsonCommits data is 0")
             
             // update tableview with data
             DispatchQueue.main.async {
