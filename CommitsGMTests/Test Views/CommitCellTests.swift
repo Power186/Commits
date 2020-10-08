@@ -26,9 +26,15 @@ class CommitCellTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    // MARK: - Cells
 
     func testCell_Config_ShouldSetLabelsToCommitData() {
-        // label tests here
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell",
+                                                 for: IndexPath(row: 0, section: 0)) as! CommitCell
+        XCTAssertNotNil(cell.authorLabel.text)
+        XCTAssertNotNil(cell.hashLabel.text)
+        XCTAssertNotNil(cell.messageLabel.text)
     }
 
 }

@@ -28,7 +28,9 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             // read the commits back out
             let jsonCommitArray = jsonCommits.arrayValue
-            print("Received \(jsonCommitArray.count) new commits.")
+            
+            // DEBUG: return if data from JSON fetched from GitHub is 0
+            assert((jsonCommitArray.count != 0), "jsonCommits data is empty")
             
             // update tableview with data
             DispatchQueue.main.async {
@@ -46,16 +48,22 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        // intialize tableview with CommitCell and cast as CommitCell to use behavior
+        let cell = commitTableView.dequeueReusableCell(withIdentifier: "CommitCell") as! CommitCell
         
         // assign each commit a row
         let commit = commits[indexPath.row]
         
-        // loop through commits array and fetch selected commit data to display in label
+        // loop through commits array and fetch selected commit data
         for _ in commits {
-            let sha = commit["commit"]["author"]["name"].stringValue
+            let author = commit["commit"]["author"]["name"].stringValue
+            let sha = commit["sha"].stringValue
+            let message = commit["commit"]["message"].stringValue
             
-            cell.textLabel?.text = sha
+            // assign labels to selected data
+            cell.authorLabel.text = author
+            cell.hashLabel.text = sha
+            cell.messageLabel.text = message
         }
         
         return cell

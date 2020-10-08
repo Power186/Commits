@@ -17,6 +17,7 @@
 		D2577D80252EA5C700F2F3FE /* CommitCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2577D7F252EA5C700F2F3FE /* CommitCellTests.swift */; };
 		D2577D87252EA9A500F2F3FE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2577D86252EA9A500F2F3FE /* Extensions.swift */; };
 		D25EE673252EE65000B578A2 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EE672252EE65000B578A2 /* SwiftyJSON.swift */; };
+		D25EE677252EF15900B578A2 /* CommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EE676252EF15900B578A2 /* CommitCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		D2577D7F252EA5C700F2F3FE /* CommitCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitCellTests.swift; sourceTree = "<group>"; };
 		D2577D86252EA9A500F2F3FE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D25EE672252EE65000B578A2 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		D25EE676252EF15900B578A2 /* CommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,12 +89,12 @@
 			children = (
 				D2577D49252E99F200F2F3FE /* AppDelegate.swift */,
 				D2577D4B252E99F200F2F3FE /* SceneDelegate.swift */,
-				D2577D75252E9F9000F2F3FE /* CommitViewController.swift */,
-				D2577D4F252E99F200F2F3FE /* Main.storyboard */,
 				D2577D52252E99F300F2F3FE /* Assets.xcassets */,
-				D2577D54252E99F300F2F3FE /* LaunchScreen.storyboard */,
+				D25EE67C252EFAF500B578A2 /* Storyboards */,
+				D25EE680252EFBBE00B578A2 /* Controllers */,
+				D25EE67F252EFBB400B578A2 /* Cells */,
+				D25EE67E252EFB9B00B578A2 /* JSON */,
 				D2577D57252E99F300F2F3FE /* Info.plist */,
-				D25EE672252EE65000B578A2 /* SwiftyJSON.swift */,
 			);
 			path = CommitsGM;
 			sourceTree = "<group>";
@@ -130,6 +132,39 @@
 				D2577D86252EA9A500F2F3FE /* Extensions.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		D25EE67C252EFAF500B578A2 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D2577D4F252E99F200F2F3FE /* Main.storyboard */,
+				D2577D54252E99F300F2F3FE /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D25EE67E252EFB9B00B578A2 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				D25EE672252EE65000B578A2 /* SwiftyJSON.swift */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		D25EE67F252EFBB400B578A2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D25EE676252EF15900B578A2 /* CommitCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D25EE680252EFBBE00B578A2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D2577D75252E9F9000F2F3FE /* CommitViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +271,7 @@
 				D2577D76252E9F9000F2F3FE /* CommitViewController.swift in Sources */,
 				D2577D4C252E99F200F2F3FE /* SceneDelegate.swift in Sources */,
 				D25EE673252EE65000B578A2 /* SwiftyJSON.swift in Sources */,
+				D25EE677252EF15900B578A2 /* CommitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
