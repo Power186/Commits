@@ -18,7 +18,7 @@ iOS App: view top 25 commits using the GitHub API.
 
 ### App Walkthrough GIF
 
-<img src="" width=250><br>
+<img src="https://github.com/Power186/Commits/blob/master/github.gif" width=250><br>
 
 ### Notes
 First time using SwiftJSON and made parsing and displaying data a breeze with minimal code.  TDD was challenge with the Table View and cell, 
