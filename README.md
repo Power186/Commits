@@ -1,5 +1,5 @@
 # Commits
-iOS App: view top 25 commits using the GitHub API.
+iOS App: view most recent 25 commits using the GitHub API.
 
 ## CommitsGM App
 
@@ -7,12 +7,12 @@ iOS App: view top 25 commits using the GitHub API.
 
 #### REQUIRED 
 - [X] User taps on app icon to open.
-- [X] The most recent commits (at least 25) are retrieved and displayed in a list with author, hash, and commit message.
+- [X] The most recent commits (at least 25) are retrieved from GitHub API and displayed in a list with author, hash, and commit message.
 
 #### BONUS
-- [X] Custom app icon is displayed on phone screen.
+- [X] App icon is displayed on phone screen.
 - [X] AutoLayout implemented.
-- [X] Use of SwiftyJSON to fetch data.
+- [X] Use of SwiftyJSON to fetch data from API.
 - [X] Hybrid TDD with unit tests and asserts.
 - [X] Styling.
 
@@ -21,5 +21,4 @@ iOS App: view top 25 commits using the GitHub API.
 <img src="https://github.com/Power186/Commits/blob/master/github.gif" width=250><br>
 
 ### Notes
-First time using SwiftJSON and made parsing and displaying data a breeze with minimal code.  TDD was challenge with the Table View and cell, 
-but overcome with the help of Apple documention.  
+SwiftyJSON made parsing and displaying data a breeze with minimal code.  Unit testing, assertions, and documenting my code were my favorite implementations, as well as adding the launch and home screen icons. 
