@@ -1,5 +1,5 @@
 # Commits
-iOS App: view most recent 25 commits from Apple's Swift repo using the GitHub API.
+iOS App: view most recent 25 commits from a repo using the GitHub API.
 
 Please see Notes for custom use.
 
