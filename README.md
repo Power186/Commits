@@ -17,6 +17,7 @@ Please see Notes for custom use.
 - [X] Use of SwiftyJSON to fetch data from API.
 - [X] Hybrid TDD with unit tests and asserts.
 - [X] Styling.
+- [X] Refresh control for user to swipe down and reload new commits, if any.
 
 ### App Walkthrough GIF
 
