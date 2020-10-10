@@ -15,6 +15,8 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var commits = [JSON]()
     
+    let commitRefreshControl = UIRefreshControl()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -26,6 +28,10 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Load data
         loadGitHubCommits()
+        
+        // refresh control, reload data
+        commitRefreshControl.addTarget(self, action: #selector(loadGitHubCommits), for: .valueChanged)
+        commitTableView.refreshControl = commitRefreshControl
     }
     
     // MARK: - TableView Datasource
@@ -64,7 +70,7 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Private Methods
     
-    private func loadGitHubCommits() {
+    @objc private func loadGitHubCommits() {
         // Fetch data with SwiftyJSON from GitHub API, if error returns nil
         if let data = try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!) {
             let jsonCommits = JSON(parseJSON: data)
@@ -78,11 +84,17 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Debug: return if data from JSON fetched from GitHub is 0
             assert((jsonCommitArray.count != 0), "jsonCommits data is 0")
             
+            // add data to array
+            self.commits = jsonCommitArray
+            
             // update tableview with data
             DispatchQueue.main.async {
-                self.commits = jsonCommitArray
                 self.commitTableView.reloadData()
             }
+            
+            // disable refresh control after refreshing data
+            self.commitRefreshControl.endRefreshing()
+            
         }
     }
 
