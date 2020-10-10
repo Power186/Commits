@@ -10,11 +10,13 @@ import UIKit
 class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties
+    
     @IBOutlet weak var commitTableView: UITableView!
     
     var commits = [JSON]()
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,47 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
         commitTableView.delegate = self
         commitTableView.dataSource = self
         
+        // Load data
+        loadGitHubCommits()
+    }
+    
+    // MARK: - TableView Datasource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commits.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Table view cells are reused and should be dequeued using cell identifier
+        let cellIdentifier = "CommitCell"
+        
+        // intialize tableview with CommitCell and cast as CommitCell to use behavior
+        guard let cell = commitTableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                             for: indexPath) as? CommitCell else {
+            fatalError("The dequeued cell is not an instance of CommitCell")
+        }
+        
+        // Fetches appropriate commit for data source layout
+        let commit = commits[indexPath.row]
+        
+        // loop through commits array for selected commit data
+        for _ in commits {
+            let author = commit["commit"]["author"]["name"].stringValue
+            let sha = commit["sha"].stringValue
+            let message = commit["commit"]["message"].stringValue
+            
+            // assign labels to selected data
+            cell.authorLabel.text = author
+            cell.hashLabel.text = sha
+            cell.messageLabel.text = message
+        }
+        
+        return cell
+    }
+    
+    // MARK: - Private Methods
+    
+    private func loadGitHubCommits() {
         // Fetch data with SwiftyJSON from GitHub API, if error returns nil
         if let data = try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!) {
             let jsonCommits = JSON(parseJSON: data)
@@ -41,35 +84,6 @@ class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.commitTableView.reloadData()
             }
         }
-        
-    }
-    
-    // MARK: - UITableView Delegate and Datasource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commits.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // intialize tableview with CommitCell and cast as CommitCell to use behavior
-        let cell = commitTableView.dequeueReusableCell(withIdentifier: "CommitCell") as! CommitCell
-        
-        // assign each commit a row
-        let commit = commits[indexPath.row]
-        
-        // loop through commits array and fetch selected commit data
-        for _ in commits {
-            let author = commit["commit"]["author"]["name"].stringValue
-            let sha = commit["sha"].stringValue
-            let message = commit["commit"]["message"].stringValue
-            
-            // assign labels to selected data
-            cell.authorLabel.text = author
-            cell.hashLabel.text = sha
-            cell.messageLabel.text = message
-        }
-        
-        return cell
     }
 
 }
