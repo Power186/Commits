@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommitCell: UITableViewCell {
+final class CommitCell: UITableViewCell {
     
     // MARK: - Properties
     @IBOutlet weak var authorLabel: UILabel!

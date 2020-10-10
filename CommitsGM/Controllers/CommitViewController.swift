@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class CommitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties
     
