@@ -55,7 +55,7 @@ class CommitsGMViewControllerTests: XCTestCase {
     }
     
     // MARK: - Performance
-    func testAPI_LoadCommits() {
+    func testAPI_LoadCommitsFunction() {
         measure {
             _ = MockAPI()
         }
