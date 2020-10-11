@@ -20,6 +20,8 @@ extension CommitCellTests {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             return UITableViewCell()
         }
-        
     }
 }
+
+    
+

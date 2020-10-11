@@ -71,8 +71,8 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Private Methods
     
     @objc private func loadGitHubCommits() {
-        // Fetch data with SwiftyJSON from GitHub API, if error returns nil
-        if let data = try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!) {
+        // Fetch data with SwiftyJSON from GitHub API, if error returns message
+        if let data = (try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!)) ?? "failed to fetch data" {
             let jsonCommits = JSON(parseJSON: data)
             
             // read the commits back out
