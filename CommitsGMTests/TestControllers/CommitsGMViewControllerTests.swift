@@ -44,7 +44,6 @@ class CommitsGMViewControllerTests: XCTestCase {
     
     // MARK: - Sections
     func testTableViewSections_Count_ReturnsOne() {
-        
         let sections = commitTableView.numberOfSections
         XCTAssertEqual(sections, 1)
     }
@@ -53,6 +52,13 @@ class CommitsGMViewControllerTests: XCTestCase {
     func testTableViewRows_SectionOne_ReturnsCommitsCount() {
         let count = sut.commits.count
         XCTAssertEqual(commitTableView.numberOfRows(inSection: 0), count)
+    }
+    
+    // MARK: - Performance
+    func testAPI_LoadCommits() {
+        measure {
+            _ = MockAPI()
+        }
     }
     
 }
