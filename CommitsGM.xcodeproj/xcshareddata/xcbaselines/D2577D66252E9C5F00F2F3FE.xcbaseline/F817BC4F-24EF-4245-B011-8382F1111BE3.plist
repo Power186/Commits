@@ -16,6 +16,16 @@
 					<string>Local Baseline</string>
 				</dict>
 			</dict>
+			<key>testAPI_LoadCommitsFunction()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>1.968e-05</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+			</dict>
 			<key>testJSON_LoadCommits()</key>
 			<dict>
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
