@@ -78,10 +78,7 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
             // read the commits back out
             let jsonCommitArray = jsonCommits.arrayValue
             
-            // Debug: return if array is less than the request param of 25
-            assert(jsonCommitArray.count <= 25, "array is returning less than 25")
-            
-            // Debug: return if data from JSON fetched from GitHub is 0
+            // return if data from JSON fetched from GitHub is 0
             assert((jsonCommitArray.count != 0), "jsonCommits data is 0")
             
             // add data to array
