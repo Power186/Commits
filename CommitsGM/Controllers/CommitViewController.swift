@@ -13,7 +13,7 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var commitTableView: UITableView!
     
-    var commits = [JSON]()
+    private var commits = [JSON]()
     
     let commitRefreshControl = UIRefreshControl()
     
