@@ -33,6 +33,6 @@ SwiftyJSON made parsing and displaying data a breeze with minimal code.  Unit te
 * Swift
 * Xcode12
 * SwiftyJSON
-* MVC
+* MVP
 * Code refactoring
 * GitHub API
