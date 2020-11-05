@@ -13,7 +13,7 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var commitTableView: UITableView!
     
-    private var commits = [JSON]()
+    let dataPresenter = DataPresenter()
     
     let commitRefreshControl = UIRefreshControl()
     
@@ -27,17 +27,18 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
         commitTableView.dataSource = self
         
         // Load data
-        loadGitHubCommits()
+        dataPresenter.loadGitHubCommits(completion: {
+            DispatchQueue.main.async {
+                self.commitTableView.reloadData()
+            }
+        })
         
-        // refresh control, reload data
-        commitRefreshControl.addTarget(self, action: #selector(loadGitHubCommits), for: .valueChanged)
-        commitTableView.refreshControl = commitRefreshControl
     }
     
     // MARK: - TableView Datasource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commits.count
+        return dataPresenter.commits.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,52 +48,49 @@ final class CommitViewController: UIViewController, UITableViewDelegate, UITable
         // intialize tableview with CommitCell and cast as CommitCell to use behavior
         guard let cell = commitTableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                              for: indexPath) as? CommitCell else {
-            fatalError("The dequeued cell is not an instance of CommitCell")
+            return UITableViewCell()
         }
         
         // Fetches appropriate commit for data source layout
-        let commit = commits[indexPath.row]
+        let commit = dataPresenter.commits[indexPath.row]
         
-        // loop through commits array for selected commit data
-        for _ in commits {
-            let author = commit["commit"]["author"]["name"].stringValue
-            let sha = commit["sha"].stringValue
-            let message = commit["commit"]["message"].stringValue
-            
-            // assign labels to selected data
-            cell.authorLabel.text = author
-            cell.hashLabel.text = sha
-            cell.messageLabel.text = message
-        }
+        // assign labels to selected data
+        cell.authorLabel.text = commit.authorName
+        cell.hashLabel.text = commit.sha
+        cell.messageLabel.text = commit.message
         
         return cell
     }
     
-    // MARK: - Private Methods
+}
+
+class DataPresenter {
+    var commits = [Commit]()
     
-    @objc private func loadGitHubCommits() {
-        // Fetch data with SwiftyJSON from GitHub API, if error returns message
+    struct Commit {
+        let authorName: String
+        let sha: String
+        let message: String
+    }
+    
+    @objc func loadGitHubCommits(completion: @escaping () -> Void) {
+        
         if let data = (try? String(contentsOf: URL(string:"https://api.github.com/repos/apple/swift/commits?per_page=25")!)) ?? "failed to fetch data" {
             let jsonCommits = JSON(parseJSON: data)
             
-            // read the commits back out
             let jsonCommitArray = jsonCommits.arrayValue
             
-            // return if data from JSON fetched from GitHub is 0
-            assert((jsonCommitArray.count != 0), "jsonCommits data is 0")
-            
-            // add data to array
-            self.commits = jsonCommitArray
-            
-            // update tableview with data
-            DispatchQueue.main.async {
-                self.commitTableView.reloadData()
+            let commitModels = jsonCommitArray.compactMap {
+                Commit(authorName: $0["commit"]["author"]["name"].stringValue,
+                       sha: $0["sha"].stringValue,
+                       message: $0["commit"]["message"].stringValue)
             }
             
-            // disable refresh control after refreshing data
-            self.commitRefreshControl.endRefreshing()
+            assert((jsonCommitArray.count != 0), "jsonCommits data is 0")
             
+            self.commits = commitModels
+
+            completion()
         }
     }
-
 }
